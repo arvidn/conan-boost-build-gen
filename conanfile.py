@@ -44,6 +44,7 @@ class BoostBuild(Generator):
 
 class MyCustomGeneratorPackage(ConanFile):
     name = "BoostBuildGen"
+    description = "conan generator for integration with boost-build"
     version = "0.1"
     author = "Arvid Norberg (arvid@libtorrent.org)"
     url = "https://github.com/arvidn/conan-boost-build-gen"
