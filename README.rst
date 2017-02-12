@@ -31,7 +31,7 @@ and use the ``BoostBuild`` generator.
 ::
 
 	[requires]
-	BoostBuildGen@0.1@arvidn/testing
+	BoostBuildGen/0.1@arvidn/testing
 
 	[generators]
 	BoostBuild
