@@ -25,13 +25,24 @@ the following targets generated::
 		<include>/Users/arvid/.conan/data/OpenSSL/1.0.2g/lasote/stable/package/811d822905b54fc167634e916129401c4f86d1e5/include
 		;
 
+	alias conan-deps :
+		ssl
+		crypto
+	;
+
+In you ``Jamfile``, add a dependency on ``conan-deps``, like this::
+
+	exe my_executable : foobar.cpp conan-deps ;
+
+Note that all other target names may be unpredictible.
+
 In order to use this generator, add a dependency on it on your ``conanfile.txt``
 and use the ``BoostBuild`` generator.
 
 ::
 
 	[requires]
-	BoostBuildGen/0.1@arvidn/testing
+	BoostBuildGen/1.0@arvidn/testing
 
 	[generators]
 	BoostBuild

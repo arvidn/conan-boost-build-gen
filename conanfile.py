@@ -11,7 +11,7 @@ as a <library> property.
 from conans.model import Generator
 from conans import ConanFile
 
-def JamfileOutput(dep_name, dep_cpp_info):
+def JamfileOutput(dep_cpp_info):
     out = ''
     for lib in dep_cpp_info.libs:
         out += 'lib %s :\n' % lib
@@ -38,23 +38,29 @@ class BoostBuild(Generator):
         out = ''
 
         for dep_name, dep_cpp_info in self.deps_build_info.dependencies:
-            out += JamfileOutput(dep_name, dep_cpp_info)
+            out += JamfileOutput(dep_cpp_info)
+
+        out += 'alias conan-deps :\n'
+        for dep_name, dep_cpp_info in self.deps_build_info.dependencies:
+            for lib in dep_cpp_info.libs:
+                out += '\t%s\n' % lib
+        out += ';\n'
 
         return out
 
 class MyCustomGeneratorPackage(ConanFile):
     name = "BoostBuildGen"
     description = "conan generator for integration with boost-build"
-    version = "0.1"
+    version = "1.0"
     author = "Arvid Norberg (arvid@libtorrent.org)"
     url = "https://github.com/arvidn/conan-boost-build-gen"
     license = "BSD"
 
     def build(self):
-      pass
+        pass
 
     def package_info(self):
-      self.cpp_info.includedirs = []
-      self.cpp_info.libdirs = []
-      self.cpp_info.bindirs = []
+        self.cpp_info.includedirs = []
+        self.cpp_info.libdirs = []
+        self.cpp_info.bindirs = []
 
